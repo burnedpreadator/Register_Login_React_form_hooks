@@ -1,0 +1,56 @@
+.login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 90vh;
+    font-family: "Inter";
+}
+.login__form{
+    display: flex;
+    flex-direction: column;
+}
+
+.login__form > h1{
+    font-size: 35px;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+.login__form >input {
+    min-width: 300px;
+    padding: 10px 0;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    outline: none;
+    border: 1px solid rgba(0,0,0,0.24);
+    font-family: "Inter";
+    border-radius: 2px;
+    font-size: 15px;
+}
+
+
+.submit__btn {
+    padding: 10px 20px;
+    margin-top: 10px;
+    background: black;
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-family: "Inter";
+    border-radius: 3px;
+}
+
+.existing_user {
+    padding: 10px 0px;
+    font-family: "Inter";
+}
+
+.existing_user a{
+    text-decoration: none;
+    color: red;
+}
+.existing_user a:hover{
+    color: maroon;
+    font-size: 20px;
+    transition: 100ms;
+}
