@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { Component } from "react";
 import "./Home.css";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import {NavLink} from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import {login} from "../features/userSlice";
-import { useDispatch } from "react-redux";
+// import {login} from "../features/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { useHistory } from 'react-router-dom';
+import { loginUser } from "../actions/loginAction";
 
 const Login = () => {
   const {
@@ -20,31 +23,71 @@ const Login = () => {
 
   const history = useNavigate();
 
-  const onSubmit = (data) => {
-    const {email, password} = data;
-    const key = email;
+  const users = useSelector((state) => state.signup.users);
+  console.log("user is undefined: "+ users);
 
-    const getuserArr = localStorage.getItem(key);
+  const onSubmit = (userData) => {
+    // // const key = email;
 
-    dispatch(
-      login({
-        email: email,
-        password: password
-      })
-    );
+    // // const getuserArr = localStorage.getItem(key);
+
+    // // dispatch(
+    // //   login({
+    // //     email: email,
+    // //     password: password
+    // //   })
+    // // );
     
-    if(getuserArr && getuserArr.length){
-        const userdata = JSON.parse(getuserArr);
-        const userlogin = userdata.filter((el, k) => {
-            return el.email === email && el.password === password
-        });
-        if(userlogin.length === 0) {
-            alert("invalid login");
-        }else{
-            console.log("user login successful");
-            localStorage.setItem("user_login", JSON.stringify(userlogin));
-            history("/details")
-        }
+    // // if(getuserArr && getuserArr.length){
+    // //     const userdata = JSON.parse(getuserArr);
+    // //     const userlogin = userdata.filter((el, k) => {
+    // //         return el.email === email && el.password === password
+    // //     });
+    // //     if(userlogin.length === 0) {
+    // //         alert("invalid login");
+    // //     }else{
+    // //         console.log("user login successful");
+    // //         localStorage.setItem("user_login", JSON.stringify(userlogin));
+    // //         history("/details")
+    // //     }
+    // // }
+    // const {email, password} = data;
+    // // dispatch(loginUser(data, history));
+
+    // // axios
+    // //   .get('https://reqres.in/api/users?email=' + email)
+    // //   .then((response) => {
+    // //     // Handle successful login
+    // //     console.log("user found");
+    // //     const users = response.data.data;
+    // //     console.log(users);
+    // //     dispatch(loginUserSuccess(response.data));
+    // //     const matchingUser = users.find((user) => user.email === email);
+        
+    // //     if (matchingUser && matchingUser.password === password) {
+    // //       // Login successful
+    // //       dispatch(loginUserSuccess(matchingUser));
+    // //       console.log('User logged in successfully:', matchingUser);
+    // //       history('/details');
+    // //     } else {
+    // //       // Invalid credentials
+    // //       dispatch(loginUserFailure('Invalid email or password'));
+    // //     }
+    // //   })
+    // //   .catch((error) => {
+    // //     console.log("user not found")
+    // //     // Handle login error
+    // //     dispatch(loginUserFailure(error.message));
+    // //   });
+    
+    const matchedUser = users.find(
+      (user) => user.email === userData.email && user.password === userData.password
+    );
+    if(matchedUser){
+      dispatch(loginUser([matchedUser.firstname, matchedUser.lastname, matchedUser.email, matchedUser.password]));
+      history('/details');
+    }else{
+      console.log('invalid user');
     }
   }
   

@@ -3,6 +3,9 @@ import "./Home.css";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import { NavLink } from "react-router-dom";
+// import axios from "axios";
+import { useDispatch } from "react-redux";
+import { signupUser } from "../actions/signUpActions";
 
 const Home = () => {
   const {
@@ -17,17 +20,37 @@ const Home = () => {
   const password = useRef({});
   password.current = watch("password", "");
 
-  const [userData, setUserData] = useState([]);
+  // const [userData, setUserData] = useState([]);
+  const dispatch = useDispatch();
 
   const onSubmit = (data) => {
-    const {email} = data;
-    const key = email;
-    localStorage.setItem(key, JSON.stringify([...userData, data]));
+
+    const userData = {
+      firstname: data.firstname,
+      lastname: data.lastname,
+      email: data.email,
+      password: data.password
+    }
+
+    // localStorage.setItem(key, JSON.stringify([...userData, data]));
+    // console.log(data);
+    // axios
+    //   .post('https://reqres.in/api/users', data)
+    //   .then((response) => {
+    //     console.log('User registered successfully:', response.data);
+    //     dispatch(registerUserSuccess(response.data));
+    //   })
+    //   .catch((error) => {
+    //     console.log('error');
+    //     dispatch(registerUserFailure(error.message));
+    //   });
+    console.log(userData);
+    dispatch(signupUser(userData));
   };
 
   return (
     <div className="login">
-      <form className="login__form" onSubmit={e=>e.preventDefault()}>
+      <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
         <h1>Register Here</h1>
         <input
           type="name"
@@ -109,7 +132,7 @@ const Home = () => {
         {errors.confirmpwd && (
           <div className="invalid-feedback">{errors.confirmpwd.message}</div>
         )}
-        <button type="submit" className="submit__btn" onClick={handleSubmit(onSubmit)}>
+        <button type="submit" className="submit__btn">
           Submit
         </button>
         <span className="existing_user">
