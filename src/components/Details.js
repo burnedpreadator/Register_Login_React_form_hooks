@@ -32,7 +32,8 @@ const Details = () => {
   if (loggedIn) {
     return (
       <div className="details">
-        <h1>HI! {userDetails[0]}</h1>
+        <h1>HI! {userDetails[0]}!  YOU CAN MAKE REGISTER AND LOGIN API CALLS HERE</h1>
+        
         <button onClick={userlogout} className="submit__btn">
           LogOut
         </button>
