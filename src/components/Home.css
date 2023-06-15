@@ -9,6 +9,7 @@
 .login__form{
     display: flex;
     flex-direction: column;
+    margin: 10px;
 }
 
 .login__form > h1{
@@ -53,4 +54,21 @@
     color: maroon;
     font-size: 20px;
     transition: 100ms;
+}
+.api_call{
+    display: flex;
+    justify-content: center;
+    width: 100vw;
+}
+
+.api__btn{
+    padding: 10px 20px;
+    margin: 10px;
+    min-width: 200px;
+    background: black;
+    border: none;
+    color: white;
+    font-size: 14px;
+    font-family: "Inter";
+    border-radius: 3px;
 }

@@ -1,6 +1,6 @@
 const initialState = {
     isLoggedIn: false,
-    currentUser: null,
+    loginApiCalled: null,
   };
   
   const loginReducer = (state = initialState, action) => {
@@ -15,7 +15,7 @@ const initialState = {
         return {
           ...state,
           isLoggedIn: false,
-          currentUser: null,
+          loginApiCalled: null,
         };
       default:
         return state;

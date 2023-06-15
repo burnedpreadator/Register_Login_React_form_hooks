@@ -127,6 +127,7 @@ class Home extends Component {
       password: data.password,
     };
     this.props.signupUser(userData);
+    this.props.navigate("/login");
   };
   render() {
     return (
