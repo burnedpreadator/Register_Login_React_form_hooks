@@ -114,7 +114,7 @@ const RegisterForm = ({ onSubmit }) => {
   );
 };
 
-class Home extends Component {
+class Register extends Component {
   componentDidMount() {
     this.props.fetchDetails();
   }
@@ -147,5 +147,5 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(null, mapDispatchToProps)(function (props) {
   const navigate = useNavigate();
-  return <Home {...props} navigate={navigate} />;
+  return <Register {...props} navigate={navigate} />;
 });
